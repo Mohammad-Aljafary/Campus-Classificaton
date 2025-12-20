@@ -1,6 +1,7 @@
 torch
 torchvision
-albumentations
+albumentationsx
 matplotlib
 numpy
 ipykernel
+scikit-learn
