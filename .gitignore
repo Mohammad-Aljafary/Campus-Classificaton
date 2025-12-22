@@ -25,3 +25,5 @@ TestResults.xml
 .venv/
 
 datasets/
+
+best_model.pth
