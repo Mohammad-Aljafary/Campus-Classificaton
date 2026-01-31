@@ -75,7 +75,7 @@ The dataset is automatically split into:
 
 2. **Open the notebook**:
    ```bash
-   jupyter notebook model2.ipynb
+   jupyter notebook model.ipynb
    ```
 
 3. **Run all cells**: Execute cells sequentially to:
