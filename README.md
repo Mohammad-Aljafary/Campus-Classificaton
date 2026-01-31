@@ -10,24 +10,24 @@ This project implements a transfer learning approach using a pre-trained ResNet-
 
 - **Transfer Learning**: Utilizes pre-trained ResNet-18 model from torchvision
 - **Data Augmentation**: Implements various augmentation techniques using Albumentations library:
-  - Random cropping
+  - Resize and cropping
   - Horizontal flipping
   - Random rotation
-  - Color jittering
+  - Blur
 - **Class Imbalance Handling**: Uses weighted loss function to address class imbalance
 - **GPU Support**: Automatically detects and uses CUDA-enabled GPU if available
 - **Model Checkpointing**: Saves the best model based on validation accuracy
-- **Visualization**: Training and validation loss curves
+- **Visualization**: Training and validation loss/accuracy curves, confusion matrix, and classification report
 
 ## Project Structure
 
 ```
 Campus-Classificaton/
-├── model.ipynb          # Main Jupyter notebook with training pipeline
+├── model2.ipynb         # Main Jupyter notebook with training pipeline
 ├── best_model.pth       # Saved best model weights
 ├── requirements.txt     # Project dependencies
 ├── datasets/            # Dataset directory (not included)
-└── README.md           # This file
+└── README.md            # This file
 ```
 
 ## Requirements
@@ -75,14 +75,14 @@ The dataset is automatically split into:
 
 2. **Open the notebook**:
    ```bash
-   jupyter notebook model.ipynb
+   jupyter notebook model2.ipynb
    ```
 
 3. **Run all cells**: Execute cells sequentially to:
    - Load and preprocess the dataset
    - Set up data augmentation
    - Configure the ResNet-18 model
-   - Train the model (default: 20 epochs)
+   - Train the model (default: 10 epochs)
    - Evaluate on test set
    - Visualize training metrics
 
@@ -90,18 +90,19 @@ The dataset is automatically split into:
 
 - **Base Model**: ResNet-18 (pre-trained on ImageNet)
 - **Modification**: Final fully connected layer replaced to match number of classes
-- **Training Strategy**: 
+- **Training Strategy**:
   - All layers frozen except the final classification layer
   - Fine-tuning on custom dataset
-  - Uses Adam optimizer with learning rate 0.001
+  - Uses AdamW optimizer with learning rate 0.001
 
 ## Data Preprocessing
 
 ### Training Data
+- Resize to 256×256
 - Random crop to 224×224
 - Horizontal flip (p=0.5)
 - Random rotation (±15°)
-- Color jitter (brightness, contrast, saturation, hue)
+- Blur (p=0.2)
 - ImageNet normalization
 
 ### Validation/Test Data
@@ -112,8 +113,8 @@ The dataset is automatically split into:
 ## Training Configuration
 
 - **Batch Size**: 32
-- **Epochs**: 20
-- **Optimizer**: Adam
+- **Epochs**: 10
+- **Optimizer**: AdamW
 - **Learning Rate**: 0.001
 - **Loss Function**: Cross-Entropy with class weights
 - **Device**: CUDA (GPU) if available, otherwise CPU
@@ -125,6 +126,7 @@ The model saves the best performing checkpoint based on validation accuracy. Aft
 - Validation accuracy and loss per epoch
 - Final test accuracy
 - Loss curves visualization
+- Confusion matrix and classification report
 
 ## Notes
 
